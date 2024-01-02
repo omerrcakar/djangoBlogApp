@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+<div class="blog_detail">
+
+        {% if can_edit %}
+            <!-- Eğer kullanıcı blogu düzenleme izinlerine sahipse, "Edit" (Düzenle) ve "Delete" (Sil) butonları görünecek -->
+            <a href="{% url 'blogs:edit' blog.slug %}" class="btn btn-primary">Düzenle</a>
+            <a href="{% url 'blogs:delete' blog.slug %}" class="btn btn-danger" onclick="return confirm('Bu blogu silmek istediğinizden emin misiniz?')">Sil</a>
+        {% endif %}
+
+    <div class="blog">
+        
+        
+
+        <img src="{{blog.thumb.url}}">
+        <h2>{{blog.title}}</h2>
+        <p>{{blog.body}}</p>
+        <p>{{blog.date}}</p>
+
+    </div>
+
+</div>
+
+{% endblock %}
