@@ -161,3 +161,98 @@ a.highlight{
     border-radius: 4px;
     margin: 10px 0;
 }
+/* Stil sayfanızın style.css dosyasında bulunmalıdır */
+.profile-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  
+.profile-heading {
+    color: #333;
+}
+  
+.profile-form-container {
+    margin-bottom: 20px;
+}
+  
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+  
+.form-group {
+    margin-bottom: 15px;
+}
+  
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+
+  
+/* Buton stilini güncelle */
+/* Buton stilini güncelle */
+/* Buton stilini güncelle */
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: 1px solid #4CAF50; /* Kutucuklu hale getirmek için kenarlık ekleyin */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Renk değişimine animasyon ekleyin */
+}
+
+.btn:hover {
+    background-color: #45a049; /* Fare üzerine gelince renk değiştirin */
+    border: 1px solid #45a049; /* Fare üzerine gelince kenarlık rengini değiştirin */
+}
+
+
+
+  
+.btn-primary {
+    background-color: #3498db;
+}
+  
+.user-info-container {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+  
+.user-info-heading {
+    color: #333;
+}
+  
+.user-info-list {
+    list-style-type: none;
+    padding: 0;
+}
+  
+.user-info-list li {
+    margin-bottom: 10px;
+}
+
+
+  /* Yeşil renkte kenarlık ekleme */
+a.green-border {
+    border: 1px solid #4CAF50;
+    padding: 8px; /* Opsiyonel olarak butonlara biraz iç boşluk ekleyebilirsiniz */
+    border-radius: 4px;
+    transition: border-color 0.3s ease; /* Renk değişimine animasyon ekleyin */
+}
+
+a.green-border:hover {
+    border: 1px solid #45a049; /* Fare üzerine gelince kenarlık rengini değiştirin */
+}
+
+  

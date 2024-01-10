@@ -20,12 +20,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
 from blogs import views as blog_views
+from accounts.views import UserProfileView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("blogs/",include("blogs.urls")),
     path("accounts/",include("accounts.urls")),
     path("",blog_views.blog_list, name="home"),
+    path('user_profile/', UserProfileView.as_view(), name='user_profile'),
     
 ]
 
