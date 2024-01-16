@@ -6,9 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import UserProfileForm
 from .models import UserProfile
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
 
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(View):
@@ -22,8 +19,7 @@ class UserProfileView(View):
             user_profile = UserProfile.objects.create(user=request.user)
         
         form = UserProfileForm(instance=user_profile)
-        friends = user_profile.friends.all()
-        return render(request, self.template_name, {'form': form, 'friends': friends})
+        return render(request, self.template_name, {'form': form})
 
 
     def post(self, request, *args, **kwargs):
@@ -89,13 +85,3 @@ def logout_view(request):
         logout(request)
         return redirect("blogs:list")
         
-@login_required(login_url="/accounts/login/")
-def add_friend(request, friend_id):
-    friend = get_object_or_404(User, id=friend_id)
-
-    if request.user.id != friend_id:
-        user_profile = request.user.userprofile
-        user_profile.friends.add(friend.userprofile)
-        user_profile.save()
-
-    return JsonResponse({'status': 'OK'})

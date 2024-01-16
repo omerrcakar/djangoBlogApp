@@ -23,22 +23,6 @@
       </form>
     </div>
 
-    <div class="friend-list">
-      <h3>Friends:</h3>
-      <ul>
-        {% for friend in friends %}
-          <li>{{ friend.user.username }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <div class="add-friend">
-      <h3>Add Friend:</h3>
-      <ul>
-          {% for user in all_users %}
-              <li>{{ user.username }} <a href="{% url 'accounts:add_friend' user.id %}" class="btn btn-primary">Add Friend</a></li>
-          {% endfor %}
-      </ul>
-    </div>
+  
   </div>
 {% endblock %}
