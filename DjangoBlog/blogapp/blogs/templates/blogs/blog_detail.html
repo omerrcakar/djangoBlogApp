@@ -34,10 +34,10 @@
       </div>
   
       {% if user.is_authenticated %}
-        <h3>Add a Comment</h3>
+        <h3>Add Comment</h3>
         <form method="post" action="{% url 'blogs:comment_create' blog.slug %}">
           {% csrf_token %}
-          {{ comment_form.as_p }}
+          {{ comment_form.text }}
           <button type="submit">Add Comment</button>
         </form>
       {% else %}
