@@ -24,6 +24,28 @@
 
     </div>
 
+    <div>
+        <h3>Comments</h3>
+        <ul>
+          {% for comment in blog.comments.all %}
+            <li>{{ comment.user.username }}: {{ comment.text }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+  
+      {% if user.is_authenticated %}
+        <h3>Add a Comment</h3>
+        <form method="post" action="{% url 'blogs:comment_create' blog.slug %}">
+          {% csrf_token %}
+          {{ comment_form.as_p }}
+          <button type="submit">Add Comment</button>
+        </form>
+      {% else %}
+        <p>Login to add a comment.</p>
+      {% endif %}
+
+
+
 </div>
 
 {% endblock %}

@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Blog
+from .models import Blog , Comment
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from . import forms
 from django.utils import timezone
+from django.views import View
+from django.utils.decorators import method_decorator
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -77,3 +80,41 @@ def blog_delete(request, slug):
         return render(request, "blogs/blog_delete.html", {"blog": blog})
     else:
         return HttpResponse("You are not authorized to delete this blog.")
+    
+
+class BlogDetailView(View):
+    template_name = 'blogs/blog_detail.html'
+
+    def get(self, request, slug, *args, **kwargs):
+        blog = get_object_or_404(Blog, slug=slug)
+        comment_form = CommentForm()
+        return render(request, self.template_name, {'blog': blog, 'comment_form': comment_form})
+
+    @method_decorator(login_required(login_url='/accounts/login/'))
+    def post(self, request, slug, *args, **kwargs):
+        blog = get_object_or_404(Blog, slug=slug)
+        comment_form = CommentForm(request.POST)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.blog = blog
+            comment.user = request.user
+            comment.save()
+
+        return redirect('blogs:detail', slug=slug)
+    
+class CommentCreateView(View):
+    template_name = 'blogs/blog_detail.html'  # ya da ayrı bir şablon belirleyebilirsiniz, aynı şablonu kullanmak istiyorsanız bu satırı geçebilirsiniz
+
+    @method_decorator(login_required(login_url='/accounts/login/'))
+    def post(self, request, slug, *args, **kwargs):
+        blog = get_object_or_404(Blog, slug=slug)
+        comment_form = CommentForm(request.POST)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.blog = blog
+            comment.user = request.user
+            comment.save()
+
+        return redirect('blogs:detail', slug=slug)
