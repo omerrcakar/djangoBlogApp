@@ -24,19 +24,19 @@
 
     </div>
 
-    <!-- Yorumlar -->
-    <h3>Comments</h3>
-    {% for comment in comments %}
-        <p>{{ comment.user.username }} - {{ comment.text }}</p>
-    {% endfor %}
+   <!-- Yorumlar -->
+   <h3>Comments</h3>
+   {% for comment in comments %}
+       <p>{{ comment.user.username }} - {{ comment.text }}</p>
+   {% endfor %}
 
-    <!-- Yorum ekleme formu -->
-    <h3>Add Comment</h3>
-    <form method="post" action="{% url 'blogs:comment_create' blog.slug %}">
-        {% csrf_token %}
-        {{ comment_form.text }}
-        <button type="submit">Add Comment</button>
-    </form>
+   <!-- Yorum ekleme formu -->
+   <h3>Add Comment</h3>
+   <form method="post" action="{% url 'blogs:comment_create' blog.slug %}">
+       {% csrf_token %}
+       {{ comment_form.as_p }}
+       <button type="submit">Add Comment</button>
+   </form>
 
 
 

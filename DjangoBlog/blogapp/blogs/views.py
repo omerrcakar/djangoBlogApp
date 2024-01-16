@@ -19,6 +19,9 @@ def blog_detail(request,slug):
     #return HttpResponse(slug)
     blog = Blog.objects.get(slug=slug)
 
+    comments = Comment.objects.filter(blog=blog)
+    comment_form = CommentForm()
+
     # yeni eklenen
     # Sadece blogu oluşturan kullanıcı düzenleme ve silme işlemlerini gerçekleştirebilir
     if request.user == blog.author:
@@ -26,7 +29,7 @@ def blog_detail(request,slug):
     else:
         can_edit = False
 
-    return render(request,"blogs/blog_detail.html",{"blog":blog, "can_edit": can_edit})
+    return render(request,"blogs/blog_detail.html",{"blog":blog, "can_edit": can_edit, "comments":comments, "comment_form": comment_form})
 
 @login_required(login_url="/accounts/login/")
 def blog_create(request):
